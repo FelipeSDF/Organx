@@ -19,6 +19,10 @@ import Organx.views
 from django.urls import path
 
 urlpatterns = [
-    path('', Organx.views.land_page, name='land'),
+    path('', Organx.views.home, name='home'),
+
+    path('land/', Organx.views.land_page, name='land'),
+    path('add/', Organx.views.add_page, name='add'),
+
     path('admin/', admin.site.urls),
 ]
