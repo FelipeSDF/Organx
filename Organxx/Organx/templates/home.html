@@ -1,4 +1,62 @@
 {%extends 'header.html'%}
 {%block content%}
-<h1>HOME PAGE</h1>
+<main  >
+    <section id="container" class="container">
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="text-center">
+                      <img class="img-thumbnail" style="border: none;" src="https://cdn-icons-png.flaticon.com/128/476/476863.png" alt="Card image cap">
+                    </div>
+
+            <div class="card">
+                <div class="card-body">
+                <h5 class="card-title">Adicionar pessoas</h5>
+                <p class="card-text">Adicione pessoas, declare suas funções e sua respectiva empresa!</p>
+                <a href="{%url 'page' 'cadastrar' %}" class="btn btn-primary ">Clique aqui!</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="text-center">
+                    <img class="img-thumbnail" style="border: none;" src="https://cdn-icons-png.flaticon.com/128/1055/1055645.png" alt="Card image cap">
+                </div>
+            <div class="card">
+                <div class="card-body">
+                <h5 class="card-title">Consultar</h5>
+                <p class="card-text">Veja quem voce adicionou até agora!.</p>
+                <a href="{%url 'page' 'consultar' %}" class="btn btn-primary">Clique aqui!</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="text-center">
+                    <img class="img-thumbnail" style="border: none;" src="https://cdn-icons-png.flaticon.com/128/302/302409.png" alt="Card image cap">
+                </div>
+                <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Modificar</h5>
+                    <p class="card-text">Errou em algum cadastro ou alguem terminou seu serviço? conserte aqui!.</p>
+                    <a href="{%url 'page' 'alterar' %}" class="btn btn-primary">Clique aqui!</a>
+                </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="text-center">
+                    <img class="img-thumbnail" style="border: none;" src="https://cdn-icons-png.flaticon.com/128/12066/12066957.png" alt="Card image cap">
+                </div>
+                <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Exportar</h5>
+                    <p class="card-text">Baixe uma tabela com todos os registros!.</p>
+                    <a href="{%url 'page' 'cadastrar' %}" class="btn btn-primary">Clique aqui!</a>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 {%endblock content%}

@@ -1,1 +1,18 @@
-body{background-color: red;}
+/* *{
+    border: solid 0.1px;
+} */
+body{
+    height: 100%;
+}
+main{
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: normal;
+}
+#container{
+    height: max-content;
+}
+.card{
+    margin: 1vw;
+}
