@@ -1,4 +1,86 @@
 {%extends 'header.html'%}
 {%block content%}
-<h1>ADD PAGE</h1>
+<main class="container">
+    <form id="cdastro_form">
+        <div class="form-group form-group-cad">
+          <label for="formGroupExampleInput">E-mail</label>
+          <input type="email" class="form-control" id="formGroupExampleInput" placeholder="">
+        </div>
+        <div class="form-group form-group-cad">
+            <label for="formGroupExampleInput2">Nome Completo</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="">
+        </div>
+          <div class="form-group form-group-cad">
+            <label for="formGroupExampleInput2">Telefone</label>
+            <input type="number" class="form-control" id="formGroupExampleInput2" placeholder="">
+        </div>
+
+        <div class="form-group form-group-cad">
+        <label for="formGroupExampleInput2">Tipo de Cargo</label>
+            <div class="custom-control custom-checkbox">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio1">Comissionado</label>
+                </div>
+
+                <div class="custom-control custom-radio">
+                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio2">Terceirizado</label>
+                </div>
+                <div class="custom-control custom-radio">
+                <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio3">outro</label>
+                </div>
+        </div>
+        </div>
+        <div class="form-group form-group-cad">
+            <label for="exampleFormControlSelect1">Empresa</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+                <option selected>Selecionar</option>
+                <option value="1">Inova Rio</option>
+                <option value="2">Land</option>
+                <option value="3">Arpoador</option>
+                <option value="3">Espaço</option>
+                <option value="3">Outro</option>
+            </select>
+            </div>
+
+        <div class="form-group form-group-cad">
+        <label for="formGroupExampleInput2">Tipo de Cargo</label>
+        <div class="custom-control custom-checkbox">
+            <div class="custom-control custom-radio">
+                <input type="radio" id="unidade-radio1" name="Unidade" class="custom-control-input">
+                <label class="custom-control-label" for="unidade-radio1">Sede</label>
+                </div>
+
+                <div class="custom-control custom-radio">
+                <input type="radio" id="unidade-radio2" name="Unidade" class="custom-control-input">
+                <label class="custom-control-label" for="unidade-radio2">Silvado</label>
+                </div>
+
+                <div class="custom-control custom-radio">
+                <input type="radio" id="unidade-radio3" name="Unidade" class="custom-control-input">
+                <label class="custom-control-label" for="unidade-radio3">Espraiado</label>
+                </div>
+
+                <div class="custom-control custom-radio">
+                <input type="radio" id="unidade-radio4" name="Unidade" class="custom-control-input">
+                <label class="custom-control-label" for="unidade-radio4">Outro</label>
+                </div>
+        </div>
+        </div>
+
+        <div class="form-group form-group-cad">
+        <label for="formGroupExampleInput2">Função</label>
+        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Outro input">
+        </div>
+        
+        <div class="form-group form-group-cad">
+            <div class="submit-reset-area">
+                <input class="btn btn-primary" type="submit" value="Submit">
+                <input class="btn btn-primary" type="reset" value="Submit">
+            </div>
+        </div>
+    </form>
+</main>
 {%endblock content%}

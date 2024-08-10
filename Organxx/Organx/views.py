@@ -8,8 +8,6 @@ def page(request, page):
         return render(request, 'add.html', {})
     if page == 'consultar':
         return render(request, 'consultar.html', {})
-    if page == 'alterar':
-        return render(request, 'alterar.html', {})
     if page == 'login':
         return render(request, 'login.html', {})
 

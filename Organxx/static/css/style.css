@@ -1,18 +1,66 @@
 /* *{
     border: solid 0.1px;
-} */
+}  */
 body{
     height: 100%;
+
+}
+#header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    background-color:  rgba(25, 221, 179, 0.418);
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    top: 0px;
+}
+#logo{
+    width:25%;
+}
+.nav-link{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    width: 25%;
 }
 main{
     height: max-content;
     display: flex;
     justify-content: center;
     align-items: normal;
+
 }
-#container{
+.container{
     height: max-content;
+    position: relative;
+    top: 3em;
 }
-.card{
-    margin: 1vw;
+.card-home{
+    margin-bottom: 2vh;
+    border: none;
+}
+.btn-home{
+    background-color: rgb(25, 221, 179);
+    border: none;
+}
+#cdastro_form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 50vw;
+    height: 90vh;
+    width: 80%;
+    /* border: solid; */
+}
+.form-group-cad{
+    margin: 5vw;
+    width: 100%;
+    text-align: left;
+}
+.submit-reset-area{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 3vh;
+
 }
