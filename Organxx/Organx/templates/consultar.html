@@ -1,86 +1,65 @@
 {%extends 'header.html'%}
 {%block content%}
-<main class="container">
-    <form id="cdastro_form">
-        <div class="form-group form-group-cad">
-          <label for="formGroupExampleInput">E-mail</label>
-          <input type="email" class="form-control" id="formGroupExampleInput" placeholder="">
-        </div>
-        <div class="form-group form-group-cad">
-            <label for="formGroupExampleInput2">Nome Completo</label>
-            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="">
-        </div>
-          <div class="form-group form-group-cad">
-            <label for="formGroupExampleInput2">Telefone</label>
-            <input type="number" class="form-control" id="formGroupExampleInput2" placeholder="">
-        </div>
-
-        <div class="form-group form-group-cad">
-        <label for="formGroupExampleInput2">Tipo de Cargo</label>
-            <div class="custom-control custom-checkbox">
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadio1">Comissionado</label>
-                </div>
-
-                <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio2">Terceirizado</label>
-                </div>
-                <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-                <label class="custom-control-label" for="customRadio3">outro</label>
-                </div>
-        </div>
-        </div>
-        <div class="form-group form-group-cad">
-            <label for="exampleFormControlSelect1">Empresa</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-                <option selected>Selecionar</option>
-                <option value="1">Inova Rio</option>
-                <option value="2">Land</option>
-                <option value="3">Arpoador</option>
-                <option value="3">Espaço</option>
-                <option value="3">Outro</option>
-            </select>
+{% if not query %}
+    <main id="container-consultar" class="container">
+        {%if not search%}
+            <form id="consult-form" method="get" action="{% url 'consulta_pesquisa' %}">{% csrf_token %}
+                <div class="form-group form-group-cad">
+                <label for="formGroupExampleInput">CPF / Nome Completo</label>
+                <input class="form-control form-control-lg" type="text" name="query" style="width: 25rem;">
+                <input type="submit" class="btn btn-primary"  role="button" value="pesquisar"></a>
             </div>
+            </form>
 
-        <div class="form-group form-group-cad">
-        <label for="formGroupExampleInput2">Tipo de Cargo</label>
-        <div class="custom-control custom-checkbox">
-            <div class="custom-control custom-radio">
-                <input type="radio" id="unidade-radio1" name="Unidade" class="custom-control-input">
-                <label class="custom-control-label" for="unidade-radio1">Sede</label>
-                </div>
+            <section>
+            {% for pessoa in pessoas %}
+                <form class="card-consult" method="get" action="{% url 'consulta_pesquisa' %}" style="width: 20rem">
+                    <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/128/8246/8246830.png" alt="Imagem de capa do card">
+                    <div class="card-body">
+                    <h5 class="card-title">{{pessoa.nome}}</h5>
+                    <p class="card-text">Nome: {{pessoa.nome}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Cargo: br{{pessoa.cargo}}</li>
+                    </ul>
+                    <button type="submit" class="btn btn-primary" name="query" value="{{pessoa.nome}}" placeholder="Veja Mais">Veja mais</button>
+                    </div>
+                </form>
+            {%endfor%} 
+            </section>
 
-                <div class="custom-control custom-radio">
-                <input type="radio" id="unidade-radio2" name="Unidade" class="custom-control-input">
-                <label class="custom-control-label" for="unidade-radio2">Silvado</label>
-                </div>
 
-                <div class="custom-control custom-radio">
-                <input type="radio" id="unidade-radio3" name="Unidade" class="custom-control-input">
-                <label class="custom-control-label" for="unidade-radio3">Espraiado</label>
-                </div>
-
-                <div class="custom-control custom-radio">
-                <input type="radio" id="unidade-radio4" name="Unidade" class="custom-control-input">
-                <label class="custom-control-label" for="unidade-radio4">Outro</label>
-                </div>
+        {%else%}
+            <h1>{{search.nome}}</h1>
+        {%endif%}
+    </main>
+{%else%}
+    <main id="container-consultar" class="container">
+        <form id="consult-form" method="get" action="{% url 'consulta_pesquisa' %}">{% csrf_token %}
+            <div class="form-group form-group-cad">
+            <label for="formGroupExampleInput">CPF / Nome Completo</label>
+            <input class="form-control form-control-lg" type="text" name="query" style="width: 25rem;">
+            <input type="submit" class="btn btn-primary" href="" role="button" value="pesquisar"></a>
         </div>
-        </div>
+        </form>
 
-        <div class="form-group form-group-cad">
-        <label for="formGroupExampleInput2">Função</label>
-        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Outro input">
-        </div>
-        
-        <div class="form-group form-group-cad">
-            <div class="submit-reset-area">
-                <input class="btn btn-primary" type="submit" value="Submit">
-                <input class="btn btn-primary" type="reset" value="Submit">
+        <div class="card" style="width: 20rem;">
+            <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/128/8246/8246830.png" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{query.nome}}</h5>
+              <p class="card-text">Cargo: {{query.Função}}</p>
+              <p class="card-text">Empresa: {{query.empresa}}</p>
             </div>
-        </div>
-    </form>
-</main>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Email: {{query.email}}</li>
+              <li class="list-group-item">Telefone: {{query.telefone}}</li>
+              <li class="list-group-item">Trabalha em: {{query.unidade}}</li>
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link">Editar</a>
+              <a href="#" class="card-link">excluir</a>
+            </div>
+          </div>
+    </main>
+    {%endif%}
 {%endblock content%}

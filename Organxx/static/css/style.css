@@ -28,8 +28,7 @@ main{
     height: max-content;
     display: flex;
     justify-content: center;
-    align-items: normal;
-
+    align-items: center;
 }
 .container{
     height: max-content;
@@ -37,7 +36,7 @@ main{
     top: 3em;
 }
 .card-home{
-    margin-bottom: 2vh;
+    height: 35vh;
     border: none;
 }
 .btn-home{
@@ -47,14 +46,13 @@ main{
 #cdastro_form{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    border: 50vw;
+    justify-content: space-around;
     height: 90vh;
-    width: 80%;
+    width: 90%;
     /* border: solid; */
 }
 .form-group-cad{
-    margin: 5vw;
+    margin-bottom: 5vh;
     width: 100%;
     text-align: left;
 }
@@ -62,5 +60,19 @@ main{
     display: flex;
     justify-content: space-around;
     margin-bottom: 3vh;
+}
 
+.btn-consult{
+    background-color: rgb(25, 221, 179);
+    border: none;
+}
+
+#container-consultar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.card-consult{
+    /* border: solid; */
+    margin: 5vh;
 }
