@@ -3,34 +3,12 @@
 <main class="container">
     <form id="cdastro_form" method="post">{% csrf_token %}
         <div class="form-group form-group-cad">
-          <label for="formGroupExampleInput">E-mail</label>
-          <input type="text" class="form-control" id="formGroupExampleInput" name="email">
-        </div>
-        <div class="form-group form-group-cad">
             <label for="formGroupExampleInput2">Nome Completo</label>
             <input type="text" class="form-control" id="formGroupExampleInput2" name="nome">
         </div>
           <div class="form-group form-group-cad">
             <label for="formGroupExampleInput2">Telefone</label>
             <input type="number" class="form-control" id="formGroupExampleInput2" name="telefone">
-        </div>
-
-        <div class="form-group form-group-cad">
-        <label for="formGroupExampleInput2">Tipo de Cargo</label>
-            <div class="custom-control custom-checkbox">
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio1" name="cargo_radio" class="custom-control-input" value="comissionado">
-                    <label class="custom-control-label" for="customRadio1">Comissionado</label>
-                </div>
-                <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio2" name="cargo_radio" class="custom-control-input" value="terceirizado">
-                <label class="custom-control-label" for="customRadio2">Terceirizado</label>
-                </div>
-                <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio3" name="cargo_radio" class="custom-control-input" value="outro">
-                <label class="custom-control-label" for="customRadio3">outro</label>
-                </div>
-        </div>
         </div>
 
         <div class="form-group form-group-cad">
@@ -88,16 +66,10 @@
                 </div>
         </div>
         </div>
-
-        <div class="form-group form-group-cad">
-        <label for="formGroupExampleInput2">Função</label>
-        <input type="text" class="form-control" id="formGroupExampleInput2" name="funcao">
-        </div>
-        
         <div class="form-group form-group-cad">
             <div class="submit-reset-area">
-                <input class="btn btn-primary" type="submit" value="Submit">
-                <input class="btn btn-primary" type="reset" value="Submit">
+                <input class="btn btn-primary" type="reset" value="Limpar">
+                <input class="btn btn-primary" type="submit" value="Enviar">
             </div>
         </div>
     </form>

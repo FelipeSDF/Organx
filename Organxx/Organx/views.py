@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from .models import Cadastrados
+from django.contrib import messages 
 
 def adicionar(email,nome,telefone,cargo,empresa,unidade,Função):
 
-    pessoas = Cadastrados(email=email,nome=nome,telefone=telefone,cargo=cargo,empresa=empresa,unidade=unidade,Função=Função)
+    pessoas = Cadastrados(nome=nome,telefone=telefone,empresa=empresa,unidade=unidade)
     pessoas.save()
 
 
@@ -22,14 +23,12 @@ def page(request, page):
             unidade = request.POST.get('Unidade')
             funcao = request.POST.get('funcao')
 
-            print(unidade)
-
             if nome != '' and email != '' and telefone != '' and cargo != '' and empresa != '' and unidade != '' and funcao != '':
                 adicionar(email,nome,telefone,cargo,empresa,unidade,funcao)
                 print('adicionado!')
             else:
                 print('preencha todos os dados')
-            return render(request, 'add.html', {'added':nome[0:5]})
+            return render(request, 'add.html', {})
         
         return render(request, 'add.html', {})
     if page == 'consultar':
@@ -45,11 +44,27 @@ def home(request):
     return render(request, 'home.html', {})
 
 def consulta(request):
-    try:
-        nome_query = request.GET.get('query')
-        pessoa = Cadastrados.objects.get(nome = nome_query)
-        print(pessoa)
-        return render(request, 'consultar.html', {'query':pessoa})
-    except:
-        print('deu m')
-        return render(request, 'consultar.html', {})
+    if request.method == 'GET':
+        try:
+            nome_query = request.GET.get('query')
+            pessoa = Cadastrados.objects.get(nome = nome_query)
+            return render(request, 'consultar.html', {'query':pessoa})
+        except:
+            print('deu m')
+            return render(request, 'consultar.html', {})
+        
+    elif request.method == 'POST':
+        nome_query = request.POST.get('nome_query')
+        acao = request.POST.get('acao')
+        print(acao, nome_query)
+
+        if acao == 'editar':
+            editar = Cadastrados.objects.get(nome = nome_query)
+            
+            return render(request, 'consultar.html', {'query':editar,'editar':'editar', 'deletar':'False'})
+        
+        if acao == 'deletar':
+            deletar = Cadastrados.objects.get(nome = nome_query)
+
+            return render(request, 'consultar.html', {'query':deletar,'deletar':'deletar','editar':'False'})
+        

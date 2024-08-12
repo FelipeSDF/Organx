@@ -1,6 +1,7 @@
-/* *{
-    border: solid 0.1px;
-}  */
+*{
+    /* border: solid 0.1px; */
+    font-family: verdana;
+} 
 body{
     height: 100%;
 
@@ -10,19 +11,28 @@ body{
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    background-color:  rgba(25, 221, 179, 0.418);
+    background-color:  rgba(25, 221, 221, 0.734);
     position: fixed;
     z-index: 1;
     width: 100%;
     top: 0px;
 }
-#logo{
-    width:25%;
-}
+/* #logo{
+    width:100%;
+} */
+.nav{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+ }
 .nav-link{
+    font-size: 1rem;
     text-decoration: none;
+    font-family: verdana;
+    text-align: center;
     color: rgb(0, 0, 0);
     width: 25%;
+    /* border: solid; */
 }
 main{
     height: max-content;
@@ -36,13 +46,20 @@ main{
     top: 3em;
 }
 .card-home{
-    height: 35vh;
     border: none;
+    text-align: center;
+    height: 25vh;
+    margin-bottom: 5vh;
+    border-bottom: solid 1px  rgb(25, 221, 179);
 }
-.btn-home{
+.btn{
     background-color: rgb(25, 221, 179);
+    width: 40%;
     border: none;
 }
+
+/* =================== CADASTRO =================== */
+
 #cdastro_form{
     display: flex;
     flex-direction: column;
@@ -61,18 +78,58 @@ main{
     justify-content: space-around;
     margin-bottom: 3vh;
 }
-
-.btn-consult{
-    background-color: rgb(25, 221, 179);
-    border: none;
-}
-
+/* ===============CONSULTA======================= */
 #container-consultar{
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
+
+}
+#consulta_forms_head{
+    display: flex;
+    border: solid;
+}
+#consulta-input{
+    width: 15rem;
+    border: solid;
+}
+#consult-form_back{
+    width: 100%;
+}  
+.icon_button_general{
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: center center;
+    background-color: white;
+    width: 5rem;
+    height: 3rem;
+}
+#back_button{
+    background-image: image-set('https://img.icons8.com/?size=48&id=80689&format=png');
+}
+#consulta_btn{
+    background-image: image-set('https://img.icons8.com/?size=80&id=1gzwu5aKK4Xx&format=png');
+}
+.btn_icon{
+    width: 5%;
+    height: 5%;
+    border: solid;
+}
+#excluir_btn{
+    background-image: image-set('https://img.icons8.com/?size=80&id=102350&format=png');
+}
+.card-text{
+    display: flex;
+    flex-direction: column;
 }
 .card-consult{
-    /* border: solid; */
     margin: 5vh;
+    width: 20rem; 
+    border: none;
+}
+
+
+.card-buttons{
+    text-align: center;
 }
