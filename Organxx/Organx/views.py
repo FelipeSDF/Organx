@@ -34,7 +34,6 @@ def page(request, page):
     if page == 'consultar':
         pessoas = Cadastrados.objects.all()
         pessoas = pessoas.order_by('data_add').reverse()
-        pessoas = pessoas[:10]
 
         return render(request, 'consultar.html', {'pessoas':pessoas})
     if page == 'editar':
@@ -56,15 +55,31 @@ def consulta(request):
     elif request.method == 'POST':
         nome_query = request.POST.get('nome_query')
         acao = request.POST.get('acao')
-        print(acao, nome_query)
-
         if acao == 'editar':
             editar = Cadastrados.objects.get(nome = nome_query)
             
             return render(request, 'consultar.html', {'query':editar,'editar':'editar', 'deletar':'False'})
         
-        if acao == 'deletar':
-            deletar = Cadastrados.objects.get(nome = nome_query)
+        elif acao == 'deletar':
+            nome_antigo = request.POST.get('nome_query')
+            deletar = Cadastrados.objects.get(nome = nome_antigo)
+            deletar.delete()
+            print(deletar)
 
-            return render(request, 'consultar.html', {'query':deletar,'deletar':'deletar','editar':'False'})
+            pessoas = Cadastrados.objects.all()
+            pessoas = pessoas.order_by('data_add').reverse()
+            pessoas = pessoas[:10]
+
+        return render(request, 'consultar.html', {'pessoas':pessoas,'deletar':'deletar','editar':'False'})
         
+def editar(request):
+    nome = request.POST.get('nome')
+    nome_antigo = request.POST.get('nome_query')
+    empresa = request.POST.get('Empresa')
+    unidade = request.POST.get('unidade')
+    telefone = request.POST.get('telefone')
+
+    Cadastrados.objects.filter(nome = nome_antigo).update(nome =f'{nome}', empresa = f'{empresa}', unidade =f'{unidade}', telefone =f'{telefone}')
+    pessoa = Cadastrados.objects.get(nome = nome)
+
+    return render(request, 'consultar.html', {'query':pessoa})

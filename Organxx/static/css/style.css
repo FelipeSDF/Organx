@@ -14,7 +14,7 @@ body{
     background-color:  rgba(25, 221, 221, 0.734);
     position: fixed;
     z-index: 1;
-    width: 100%;
+    width: 100vw;
     top: 0px;
 }
 /* #logo{
@@ -23,7 +23,7 @@ body{
 .nav{
     width: 90%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
  }
 .nav-link{
     font-size: 1rem;
@@ -83,16 +83,11 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-
-}
+    justify-content: space-around;}
 #consulta_forms_head{
-    display: flex;
-    border: solid;
-}
+    display: flex;}
 #consulta-input{
     width: 15rem;
-    border: solid;
 }
 #consult-form_back{
     width: 100%;
@@ -129,7 +124,9 @@ main{
     border: none;
 }
 
-
 .card-buttons{
     text-align: center;
+}
+.name_title{
+    font-size: 1.5rem;
 }

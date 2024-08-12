@@ -1,109 +1,180 @@
 {%extends 'header.html'%}
 {%block content%}
 {% if not query %}
-    <main id="container-consultar" class="container">
-        {%if not search%}
-            <form id="consult-form" method="get" action="{% url 'consulta_pesquisa' %}">{% csrf_token %}
-                <label for="formGroupExampleInput">Nome Completo</label>
-            <div id="consulta_forms_head" class="form-group form-group-cad">
-                <input id="consulta-input" class="form-control form-control" type="text" name="query">
-                <input id="consulta_btn" class="btn btn-primary icon_button_general" type="submit"   role="button" value=""></a>
-            </div>
-            </form>
+<main id="container-consultar" class="container">
+    <form id="consult-form" method="get" action="{% url 'consulta_pesquisa' %}">{% csrf_token %}
+        <label for="formGroupExampleInput">Nome Completo</label>
+        <div id="consulta_forms_head" class="form-group form-group-cad">
+            <input id="consulta-input" class="form-control form-control" type="text" name="query">
+            <input id="consulta_btn" class="btn btn-primary icon_button_general" type="submit" role="button"
+                value=""></a>
+        </div>
+    </form>
 
-
-            <section>
-            {% for pessoa in pessoas %}
-                <form class="card-consult" method="get" action="{% url 'consulta_pesquisa' %}" style="width: 20rem">
-                    <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/128/8246/8246830.png" alt="Imagem de capa do card">
-                    <div class="card-body">
-                    <h5 class="card-title">{{pessoa.nome}}</h5>
-                    <p class="card-text">Nome: {{pessoa.nome}}</p>
-                    </div>
-                    <button type="submit" class="btn btn-primary" name="query" value="{{pessoa.nome}}" placeholder="Veja Mais">Veja mais</button>
-                    </div>
-                </form>
-            {%endfor%} 
-            </section>
-
-
-        {%else%}
-            <h1>{{search.nome}}</h1>
-        {%endif%}
-    </main>
-{%else%}
-    {%if not editar and not deletar %}
-        <main id="container-consultar" class="container">
-            <form id="consult-form_back" method="get" action="{% url 'page' 'consultar' %}">{% csrf_token %}
-                <button id="back_button" type="submit" class="btn btn-primary icon_button_general" href=""></button>
-            </div>
-            </form>
-
-            <form class="card" method="post" action="{%url 'consulta_pesquisa'%}" style="width: 20rem; border: none;">{% csrf_token %}
-                <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/128/8246/8246830.png" alt="Card image cap">
+    <section>
+        {% for pessoa in pessoas %}
+        <form class="card-consult" method="get" action="{% url 'consulta_pesquisa' %}" style="width: 20rem">
+            <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/128/8246/8246830.png"
+                alt="Imagem de capa do card">
             <div class="card-body">
-                <input type="hidden" value="{{query.nome}}" name="nome_query" class="card-title"><strong>{{query.nome}}</strong></input>
-                
-                <p class="card-text"><strong>Empresa</strong>{{query.empresa}}</p>
-                <p class="list-group-item"><strong>Trabalha</strong> {{query.unidade}}</p>
-                <p class="card-text"><strong>Telefone</strong>{{query.telefone}}</li>
+                <h5 class="card-title"><strong>{{pessoa.nome}}</strong></h5>
+                <p class="card-text">Empresa: {{pessoa.empresa}}</p>
+            </div>
+            <button type="submit" class="btn btn-primary" name="query" value="{{pessoa.nome}}"
+                placeholder="Veja Mais">Veja mais</button>
+            </div>
+        </form>
+        {%endfor%}
+    </section>
+</main>
+
+{%else%}
+{%if not editar and not deletar %}
+<main id="container-consultar" class="container">
+    <form id="consult-form_back" method="get" action="{% url 'page' 'consultar' %}">{% csrf_token %}
+        <button id="back_button" type="submit" class="btn btn-primary icon_button_general" href=""></button>
+        </div>
+    </form>
+
+    <form class="card" method="post" action="{%url 'consulta_pesquisa'%}" style="width: 20rem; border: none;">{%
+        csrf_token %}
+        <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/128/8246/8246830.png" alt="Card image cap">
+        <div class="card-body">
+            <input type="hidden" value="{{query.nome}}" name="nome_query" class="card-title"><strong
+                class="name_title">{{query.nome}}</strong></input>
+
+            <p class="card-text"><strong>Empresa: </strong>{{query.empresa}}</p>
+            <p class="list-group-item"><strong>Onde trabalha: </strong>{{query.unidade}}</p>
+            <p class="card-text"><strong>Telefone: </strong>{{query.telefone}}</li>
+        </div>
+
+        <div class="card-body card-buttons">
+            <button type="submit" name="acao" value="editar" placeholder="" class="btn"
+                style="width: 12rem;">Editar</button>
+            <button type="submit" name="acao" value="deletar" id="excluir_btn" type="text" placeholder="excluir"
+                class="btn icon_button_general"></button>
+        </div>
+    </form>
+</main>
+
+{%elif editar == 'editar'%}
+<main id="container-consultar" class="container">
+    <form id="consult-form_back" method="get" action="{% url 'page' 'consultar' %}">{% csrf_token %}
+        <button id="back_button" type="submit" class="btn btn-primary icon_button_general" href=""></button>
+    </form>
+
+    <form class="card" method="post" action="{%url 'editar'%}" style="width: 20rem; border: none;">{% csrf_token %}
+
+        <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/128/8246/8246830.png" alt="Card image cap">
+
+        <input type="hidden" value="{{query.nome}}" name="nome_query" class="card-title">
+        <strong class="name_title">
+            {{query.nome}}
+        </strong>
+        </input>
+
+        <p class="card-text">
+            <label for="input_nome">Nome:</label>
+            <input id="input_nome" name="nome" placeholder="{{query.nome}}"></input>
+
+        <div class="custom-control custom-checkbox">
+            <label for="input_nome">Empresa:</label>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="customRadio4" name="Empresa" class="custom-control-input" value="Inova Rio">
+                <label class="custom-control-label" for="customRadio4">Inova Rio</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="customRadio5" name="Empresa" class="custom-control-input" value="Land">
+                <label class="custom-control-label" for="customRadio5">Land</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="customRadio6" name="Empresa" class="custom-control-input" value="Arpoador">
+                <label class="custom-control-label" for="customRadio6">Arpoador</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="customRadio7" name="Empresa" class="custom-control-input" value="Espaço">
+                <label class="custom-control-label" for="customRadio7">Espaço</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="customRadio8" name="Empresa" class="custom-control-input" value="Outro">
+                <label class="custom-control-label" for="customRadio8">Arpoador</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="customRadio9" name="Empresa" class="custom-control-input" value="Outro">
+                <label class="custom-control-label" for="customRadio9">Outro</label>
+            </div>
+            </p>
+
+
+            <div class="form-group form-group-cad">
+                <label for="formGroupExampleInput2">Unidade</label>
+                <div class="custom-control custom-checkbox">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="unidade-radio1" name="unidade" value="Sede"
+                            class="custom-control-input">
+                        <label class="custom-control-label" for="unidade-radio1">Sede</label>
+                    </div>
+
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="unidade-radio2" name="unidade" value="silvado"
+                            class="custom-control-input">
+                        <label class="custom-control-label" for="unidade-radio2">Silvado</label>
+                    </div>
+
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="unidade-radio3" name="unidade" value="Espraiado"
+                            class="custom-control-input">
+                        <label class="custom-control-label" for="unidade-radio3">Espraiado</label>
+                    </div>
+
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="unidade-radio4" name="unidade" value="Outro"
+                            class="custom-control-input">
+                        <label class="custom-control-label" for="unidade-radio4">Outro</label>
+                    </div>
+                </div>
             </div>
 
-                <div class="card-body card-buttons">
-                <button type="submit"  name="acao" value="editar" placeholder="aaaa" class="btn" style="width: 12rem;">Editar</button>
-                <button type="submit" name="acao" value="deletar" id="excluir_btn" type="text"  placeholder="excluir" class="btn icon_button_general"></button>
-                </div>
-            </form>
-        </main>
+            <p class="card-text">
+                <label for="input_telefone">Telefone: </label>
+                <input id="input_telefone" name="telefone" placeholder="{{query.telefone}}"></input>
+            </p>
 
-        {%elif editar == 'editar'%}
-            <main id="container-consultar" class="container">
-                <form id="consult-form_back" method="get" action="{% url 'page' 'consultar' %}">{% csrf_token %}
-                    <button id="back_button" type="submit" class="btn btn-primary icon_button_general" href=""></button>
-                </div>
+            <div class="card-body card-buttons">
+                <button type="submit" placeholder="" class="btn" style="width: 12rem;">Confirmar</button>
+            </div>
+    </form>
+</Main>
 
-                <form class="card_consult" method="post" action="{%url 'consulta_pesquisa'%}" style="width: 20rem; border: none;">{% csrf_token %}
-                    <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/128/8246/8246830.png" alt="Card image cap">
-                    <div class="card-body">
-                        <p  value="{{query.nome}}" name="nome_query" class="card-title">
-                        <strong>
-                            {{query.nome}}
-                        </strong>
-                    </input>
+{%elif deletar == 'deletar'%}
 
-                        <p class="card-text">
-                            <label for="">Nome:</label>
-                            <input placeholder="{{query.nome}}"></input>
-                        </p>
+<main id="container-consultar" class="container">
+    <form id="consult-form" method="get" action="{% url 'consulta_pesquisa' %}">{% csrf_token %}
+        <label for="formGroupExampleInput">Nome Completo</label>
+        <div id="consulta_forms_head" class="form-group form-group-cad">
+            <input id="consulta-input" class="form-control form-control" type="text" name="query">
+            <input id="consulta_btn" class="btn btn-primary icon_button_general" type="submit" role="button"
+                value=""></a>
+        </div>
+    </form>
 
-                        <p class="card-text">
-                            <label for="">Empresa:</label>
-                            <input placeholder="{{query.empresa}}"></input>
-                        </p>
+    <section>
+        {% for pessoa in pessoas %}
+        <form class="card-consult" method="post" action="{% url 'consulta_pesquisa' %}" style="width: 20rem">
+            <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/128/8246/8246830.png"
+                alt="Imagem de capa do card">
+            <div class="card-body">
+                <h5 class="card-title">{{pessoa.nome}}</h5>
+                <p class="card-text">Empresa: {{pessoa.empresa}}</p>
+            </div>
+            <button type="submit" class="btn btn-primary" name="query" value="{{pessoa.nome}}"
+                placeholder="Veja Mais">Veja mais</button>
+            </div>
+        </form>
+        {%endfor%}
+    </section>
+</main>
+{%endif%}
 
-
-                        <p class="card-text">
-                            <label for="">Onde Trabalha:</label>
-                            <input placeholder="{{query.unidade}} "></input>
-                        </p>
-
-                   
-                        <p class="card-text">
-                            <label for="">Telefone:  </label>
-                            <input placeholder="{{query.telefone}}"></input>
-                        </p>
-                </div>
-                    <div class="card-body card-buttons">
-                        <button type="submit"  name="acao" value="editar" placeholder="aaaa" class="btn" style="width: 12rem;">Confirmar</button>
-                    </div>
-                </form>
-            </Main>
-
-        {%elif deletar == 'deletar'%}
-            <main id="container-consultar" class="container">
-                <h1>excluindo</h1>
-            </Main>
-        {%endif%}
-
-    {%endif%}
+{%endif%}
 {%endblock content%}
