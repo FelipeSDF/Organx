@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from .models import Cadastrados
-from django.contrib import messages 
+from django.contrib import messages
+from django.http import cookie
 
-def adicionar(email,nome,telefone,cargo,empresa,unidade,Função):
+def adicionar(nome,telefone,empresa,unidade):
 
     pessoas = Cadastrados(nome=nome,telefone=telefone,empresa=empresa,unidade=unidade)
     pessoas.save()
@@ -12,22 +13,30 @@ def page(request, page):
     if page == 'home':
         return render(request, 'home.html', {})
     if page == 'cadastrar':
-
+        if request.method == 'GET':
+            return render(request, 'add.html', {})
+            
         if request.method == 'POST':
-            email = request.POST.get('email')
             nome = request.POST.get('nome')
             telefone = request.POST.get('telefone')
-            cargo = request.POST.get('cargo_radio')
             empresa = request.POST.get('Empresa')
             unidade = request.POST.get('Unidade')
-            funcao = request.POST.get('funcao')
 
-            if nome != '' and email != '' and telefone != '' and cargo != '' and empresa != '' and unidade != '' and funcao != '':
-                adicionar(email,nome,telefone,cargo,empresa,unidade,funcao)
-                print('adicionado!')
+            nome = str(nome)
+            telefone = str(telefone)
+            unidade = str(unidade)
+            empresa = str(empresa)
+            
+
+            if nome.replace(' ','').isalpha() and telefone.isdigit() and nome != '' and telefone != '' and empresa != '' and unidade != '':
+                nome= nome.capitalize()
+                unidade= unidade.capitalize()
+                empresa= empresa.capitalize()
+                
+                adicionar(nome,telefone,empresa,unidade)
+                return render(request, 'add.html', {'adicionado':True})
             else:
-                print('preencha todos os dados')
-            return render(request, 'add.html', {})
+                return render(request, 'add.html', {'adicionado':False})
         
         return render(request, 'add.html', {})
     if page == 'consultar':

@@ -1,12 +1,13 @@
 {%extends 'header.html'%}
+{%load static%}
 {%block content%}
 <main id="filter_container">
     <form action="{% url 'filtrar' %}" method="get" id="form_filtro">{%csrf_token%}
         <div class="">
-            <label for="formGroupExampleInput">Por Empresa</label>
+            <label for="filtrar_por_empresa">Por Empresa</label>
 
-            <select id="formGroupExampleInput" name="empresa" class="form-control form-control-lg">
-                <option selected value="">Todas</option>
+            <select id="filtrar_por_empresa" name="empresa" class="form-control form-control-lg">
+                <option value="">Todas</option>
                 <option value="Inova">Inova Rio</option>
                 <option value="Land">Land</option>
                 <option value="Espaço">Espaço</option>
@@ -16,23 +17,27 @@
         </div>
 
         <div class="">
-            <label for="formGroupExampleInput">Por Unidade</label>
+            <label for="filtrar_por_unidade">Por Unidade</label>
 
-            <select id="formGroupExampleInput" name="unidade" class="form-control form-control-lg">
-                <option selected value="">Todas</option>
+            <select id="filtrar_por_unidade" name="unidade" class="form-control form-control-lg">
+                <option value="">Todas</option>
                 <option value="sede">Sede</option>
                 <option value="silvado">silvado</option>
                 <option value="Espraiado">espraiado</option>
                 <option value="outro">outro</option>
             </select>
         </div>
-        <div id="filter_button_container">
-            <input type="submit" id="btn_filter" value="" placeholder=""></input>
-        </div>
+
+        <button id="filter_button_container" type="submit">
+            <div id="img_filter_container">
+                <img src="https://img.icons8.com/?size=80&id=1gzwu5aKK4Xx&format=png" id="filter_button_btn" alt="filtro">
+            </div>
+            <h5 id="btn_filter">Aplicar</h5>
+        </button>
     </form>
 
     {%if filtros%}
-    <section>
+    <section class="result_container">
         {% for pessoa in pessoas %}
         <form class="card-consult" method="get" action="{% url 'consulta_pesquisa' %}" style="width: 20rem">
             <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/128/8246/8246830.png"
@@ -48,6 +53,40 @@
         </form>
         {%endfor%}
     </section>
-{%endif%}
+    {%endif%}
 </main>
+
+{%if unidade != '' and empresa != '' %}
+<script>
+    url = location.href
+    urlclass = new URL(url)
+    empresa = urlclass.searchParams.get('empresa')
+    unidade = urlclass.searchParams.get('unidade')
+
+    empresa_value = document.getElementsByName('empresa')[0]
+    unidade_value = document.getElementsByName('unidade')[0]
+
+    empresa_doc = document.getElementsByName('empresa')[0].options
+    unidade_doc = document.getElementsByName('unidade')[0].options
+
+    for (i = 0; i in unidade_doc; i++) {
+        if (unidade == unidade_doc[i].value) {
+            valor = unidade_doc[i].value
+
+            unidade_value.value = valor
+            console.log(unidade_value)
+        }
+    }
+
+    for (i = 0; i in empresa_doc; i++) {
+        if (empresa == empresa_doc[i].value) {
+            valor = empresa_doc[i].value
+
+            empresa_value.value = valor
+            console.log(empresa_value)
+        }
+    }
+
+</script>
+{%endif%}
 {% endblock content %}

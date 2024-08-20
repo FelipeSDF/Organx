@@ -1,20 +1,20 @@
 {%extends 'header.html'%}
+{%load static%}
 {%block content%}
 {% if not query %}
 {%if not filtros%}
 <main id="container-consultar" class="container">
     <form id="consult-form" method="get" action="{% url 'consulta_pesquisa' %}">{% csrf_token %}
-        <label for="formGroupExampleInput">Nome</label>
         <div id="consulta_forms_head" class="form-group form-group-cad">
             <input id="consulta-input" class="form-control form-control" type="text" name="query">
 
             <input id="consulta_btn" class="btn btn-primary icon_button_general" type="submit" role="button"
-                value=""></a>
+                value="">
             <a href="{% url 'page' 'filtrar' %}"><input id="filtro_btn" class="btn btn-primary icon_button_general" type="" role="button"></a>
         </div>
     </form>
 
-    <section>
+    <section class="result_container">
         {% for pessoa in pessoas %}
         <form class="card-consult" method="get" action="{% url 'consulta_pesquisa' %}" style="width: 20rem">
             <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/128/8246/8246830.png"
@@ -182,6 +182,6 @@
 </main>
 
 {%endif%}
-
 {%endif%}
+
 {%endblock content%}

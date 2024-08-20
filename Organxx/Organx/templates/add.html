@@ -70,5 +70,20 @@
             </div>
         </div>
     </form>
+    <div id="add_complete" style="display: none;"> <h1>adcionado</h1> <button>fechar</button></div>
+    <div id="add_error" style="display: none;"> <h1>adcionado</h1> <button>fechar</button></div>
 </main>
+{%if adicionado == True%}
+<script>
+    console.log('sim')
+</script>
+
+{%elif adicionado == False%}
+
+
+<script>
+        console.log('nao')
+</script>
+{%endif%}
+
 {%endblock content%}
