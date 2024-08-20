@@ -59,7 +59,12 @@ main{
 }
 
 /* =================== CADASTRO =================== */
-
+#container_home{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 #cdastro_form{
     display: flex;
     flex-direction: column;
@@ -83,11 +88,18 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;}
+    justify-content: space-around;
+
+}
 #consulta_forms_head{
-    display: flex;}
+    display: flex;
+    justify-content: space-around ;
+    width: 100vw;;
+    position: relative;
+    top: 1rem;
+}
 #consulta-input{
-    width: 15rem;
+    width: 80%;
 }
 #consult-form_back{
     width: 100%;
@@ -125,6 +137,14 @@ main{
     margin: 5vh;
     width: 20rem; 
     border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: content-box;
+    border: solid 0.5px rgb(0, 128, 122);
+    padding: 1%;
+    height: 60vh;
 }
 
 .card-buttons{
@@ -139,6 +159,13 @@ main{
     flex-direction: column;
     position: relative;
     top: 3em;
+}
+.result_container{
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 #form_filtro{
     display: flex;
