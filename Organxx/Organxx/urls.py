@@ -7,5 +7,6 @@ urlpatterns = [
     path('<page>', views.page, name='page'),
     path('consulta/pesquisa', views.consulta, name='consulta_pesquisa'),
     path('consulta/', views.editar, name='editar'),
+    path('filtrar/', views.filtrar, name='filtrar'),
     path('admin/', admin.site.urls),
 ]

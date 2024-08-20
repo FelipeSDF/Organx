@@ -106,6 +106,9 @@ main{
 #consulta_btn{
     background-image: image-set('https://img.icons8.com/?size=80&id=1gzwu5aKK4Xx&format=png');
 }
+#filtro_btn{
+    background-image: image-set('https://img.icons8.com/?size=48&id=18666&format=png');
+}
 .btn_icon{
     width: 5%;
     height: 5%;
@@ -129,4 +132,35 @@ main{
 }
 .name_title{
     font-size: 1.5rem;
+}
+/* ================================== */
+#filter_container{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 3em;
+}
+#form_filtro{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+}
+#filter_button_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 10vw;
+    height: 3.5vh;
+}
+#btn_filter{
+    background-image: image-set('https://img.icons8.com/?size=80&id=uuzvkFl7RArh&format=png');
+    background-repeat: no-repeat;
+    background-size: contain ;
+    border: none;
+    background-color: rgba(255, 255, 255, 0); 
+    width:  100%;
+    height: 100%;
 }

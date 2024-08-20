@@ -1,13 +1,16 @@
 {%extends 'header.html'%}
 {%block content%}
 {% if not query %}
+{%if not filtros%}
 <main id="container-consultar" class="container">
     <form id="consult-form" method="get" action="{% url 'consulta_pesquisa' %}">{% csrf_token %}
-        <label for="formGroupExampleInput">Nome Completo</label>
+        <label for="formGroupExampleInput">Nome</label>
         <div id="consulta_forms_head" class="form-group form-group-cad">
             <input id="consulta-input" class="form-control form-control" type="text" name="query">
+
             <input id="consulta_btn" class="btn btn-primary icon_button_general" type="submit" role="button"
                 value=""></a>
+            <a href="{% url 'page' 'filtrar' %}"><input id="filtro_btn" class="btn btn-primary icon_button_general" type="" role="button"></a>
         </div>
     </form>
 
@@ -27,8 +30,12 @@
         {%endfor%}
     </section>
 </main>
+{%else%}
+<h1>hihhi</h1>
+{%endif%}
 
 {%else%}
+
 {%if not editar and not deletar %}
 <main id="container-consultar" class="container">
     <form id="consult-form_back" method="get" action="{% url 'page' 'consultar' %}">{% csrf_token %}
@@ -36,8 +43,8 @@
         </div>
     </form>
 
-    <form class="card" method="post" action="{%url 'consulta_pesquisa'%}" style="width: 20rem; border: none;">{%
-        csrf_token %}
+    <form class="card" method="post" action="{%url 'consulta_pesquisa'%}" style="width: 20rem; border: none;">
+        {%csrf_token %}
         <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/128/8246/8246830.png" alt="Card image cap">
         <div class="card-body">
             <input type="hidden" value="{{query.nome}}" name="nome_query" class="card-title"><strong
@@ -144,10 +151,9 @@
                 <button type="submit" placeholder="" class="btn" style="width: 12rem;">Confirmar</button>
             </div>
     </form>
-</Main>
+</main>
 
 {%elif deletar == 'deletar'%}
-
 <main id="container-consultar" class="container">
     <form id="consult-form" method="get" action="{% url 'consulta_pesquisa' %}">{% csrf_token %}
         <label for="formGroupExampleInput">Nome Completo</label>
@@ -174,6 +180,7 @@
         {%endfor%}
     </section>
 </main>
+
 {%endif%}
 
 {%endif%}
