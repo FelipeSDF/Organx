@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{%  static 'css/style.css' %}">
     <link rel="shortcut icon" type="imagex/png" href="https://img.icons8.com/?size=48&id=114335&format=png">
     
+    
+    
 </head>
 
 <body>
@@ -21,13 +23,13 @@
 
         <nav class="nav">
             <a class="nav-link" href="{%url 'page' 'home' %}">home</a>
-            <a class="nav-link" href="{%url 'page' 'cadastrar' %}">Registrar</a>
-            <a class="nav-link" href="{%url 'page' 'consultar' %}">consultar</a>
+            <a class="nav-link" href="{%url 'add_page' %}">Registrar</a>
+            <a class="nav-link" href="{%url 'consulta_page' %}">consultar</a>
         </nav>
     </header>
     {%block content%}
     {%endblock content%}
-    <!-- <script src="{% static 'js/script_consulta.js' %}"> -->
+    <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 
 </html>

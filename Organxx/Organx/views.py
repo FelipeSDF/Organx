@@ -1,44 +1,38 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Cadastrados
+from .forms import CadForm, UpdateForm
+
 from django.contrib import messages
 from django.http import cookie
 
-def adicionar(nome,telefone,empresa,unidade):
+def adicionar(request):
+    if CadForm(request.POST).is_valid():
+        form = CadForm(request.POST)
+        form.save()
+        # messages.success(request, 'Adicionado com Sucesso')
+        messages.success(request, "Adicionado com sucesso")
+        return redirect(add_page)
+    else:
+        messages.error(request, "Houve um erro")
+        return redirect(add_page)
 
-    pessoas = Cadastrados(nome=nome,telefone=telefone,empresa=empresa,unidade=unidade)
-    pessoas.save()
+def add_page(request):
+    if request.method == 'GET':
+        form = CadForm(request.GET)
+        
+    return render(request, 'add.html', {'form':form})
+
+def consulta_page(request):
+    pessoas = Cadastrados.objects.all()
+    pessoas = pessoas.order_by('nome')
+
+    return render(request, 'consultar.html', {'pessoas':pessoas})
 
 def page(request, page):
     
     if page == 'home':
-        return render(request, 'home.html', {})
-    if page == 'cadastrar':
-        if request.method == 'GET':
-            return render(request, 'add.html', {})
-            
-        if request.method == 'POST':
-            nome = request.POST.get('nome')
-            telefone = request.POST.get('telefone')
-            empresa = request.POST.get('Empresa')
-            unidade = request.POST.get('Unidade')
-
-            nome = str(nome)
-            telefone = str(telefone)
-            unidade = str(unidade)
-            empresa = str(empresa)
-            
-
-            if nome.replace(' ','').isalpha() and telefone.isdigit() and nome != '' and telefone != '' and empresa != '' and unidade != '':
-                nome= nome.capitalize()
-                unidade= unidade.capitalize()
-                empresa= empresa.capitalize()
-                
-                adicionar(nome,telefone,empresa,unidade)
-                return render(request, 'add.html', {'adicionado':True})
-            else:
-                return render(request, 'add.html', {'adicionado':False})
-        
-        return render(request, 'add.html', {})
+        return redirect(to=home)
+    
     if page == 'consultar':
         pessoas = Cadastrados.objects.all()
         pessoas = pessoas.order_by('nome')
@@ -50,10 +44,13 @@ def page(request, page):
     if page == 'filtrar':
         pessoas = Cadastrados.objects.all()
         return render(request, 'filtros.html', {'filtros':True, 'pessoas': pessoas})
-  
-def home(request):
-    return render(request, 'home.html', {})
 
+def home(request):
+    if request.method == 'GET':
+        return render(request, 'home.html', {})
+    else:
+        return render(request, 'home.html', {})
+        
 def consulta(request):
     
     if request.method == 'GET':
@@ -78,16 +75,17 @@ def consulta(request):
     elif request.method == 'POST':
         nome_query = request.POST.get('nome_query')
         acao = request.POST.get('acao')
+        
         if acao == 'editar':
             editar = Cadastrados.objects.get(nome = nome_query)
+            form = UpdateForm(instance=editar)
             
-            return render(request, 'consultar.html', {'query':editar,'editar':'editar', 'deletar':'False'})
+            return render(request, 'consultar.html', {'query':editar,'editar':'editar', 'deletar':'False', 'form': form})
         
         elif acao == 'deletar':
             nome_antigo = request.POST.get('nome_query')
             deletar = Cadastrados.objects.get(nome = nome_antigo)
             deletar.delete()
-            print(deletar)
 
             pessoas = Cadastrados.objects.all()
             pessoas = pessoas.order_by('nome')
@@ -95,17 +93,17 @@ def consulta(request):
         return render(request, 'consultar.html', {'pessoas':pessoas,'deletar':'deletar','editar':'False'})
         
 def editar(request):
-    
-    nome = request.POST.get('nome')
     nome_antigo = request.POST.get('nome_query')
-    empresa = request.POST.get('Empresa')
-    unidade = request.POST.get('unidade')
-    telefone = request.POST.get('telefone')
-
-    Cadastrados.objects.filter(nome = nome_antigo).update(nome =f'{nome}', empresa = f'{empresa}', unidade =f'{unidade}', telefone =f'{telefone}')
-    pessoa = Cadastrados.objects.get(nome = nome)
-
-    return render(request, 'consultar.html', {'query':pessoa})
+    pessoa = Cadastrados.objects.get(nome = nome_antigo)
+    
+    form = UpdateForm(request.POST, instance=pessoa)
+    
+    if form.is_valid():
+        form.save()
+    
+    messages.success(request, 'Dados editados com sucesso')
+    return redirect(to=consulta_page)
+    # return render(request, 'consultar.html', {'query':pessoa})
 
 def filtrar(request):
     empresa = request.GET.get('empresa')

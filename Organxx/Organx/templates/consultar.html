@@ -1,8 +1,21 @@
 {%extends 'header.html'%}
 {%load static%}
 {%block content%}
+
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
 {% if not query %}
 {%if not filtros%}
+
+
 <main id="container-consultar" class="container">
     <form id="consult-form" method="get" action="{% url 'consulta_pesquisa' %}">{% csrf_token %}
         <div id="consulta_forms_head" class="form-group form-group-cad">
@@ -27,10 +40,15 @@
                 placeholder="Veja Mais">Veja mais</button>
             </div>
         </form>
+        {%empty%}
+        <div id="empty_query">
+            <p>Não há registros</p>
+        </div>
         {%endfor%}
     </section>
 </main>
 {%else%}
+
 <h1>hihhi</h1>
 {%endif%}
 
@@ -66,6 +84,7 @@
 
 {%elif editar == 'editar'%}
 <main id="container-consultar" class="container">
+
     <form id="consult-form_back" method="get" action="{% url 'page' 'consultar' %}">{% csrf_token %}
         <button id="back_button" type="submit" class="btn btn-primary icon_button_general" href=""></button>
     </form>
@@ -80,76 +99,12 @@
         </strong>
         </input>
 
-        <p class="card-text">
-            <label for="input_nome">Nome:</label>
-            <input id="input_nome" name="nome" placeholder="{{query.nome}}"></input>
+        {{form}}
 
-        <div class="custom-control custom-checkbox">
-            <label for="input_nome">Empresa:</label>
-            <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio4" name="Empresa" class="custom-control-input" value="Inova Rio">
-                <label class="custom-control-label" for="customRadio4">Inova Rio</label>
-            </div>
-            <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio5" name="Empresa" class="custom-control-input" value="Land">
-                <label class="custom-control-label" for="customRadio5">Land</label>
-            </div>
-            <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio6" name="Empresa" class="custom-control-input" value="Arpoador">
-                <label class="custom-control-label" for="customRadio6">Arpoador</label>
-            </div>
-            <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio7" name="Empresa" class="custom-control-input" value="Espaço">
-                <label class="custom-control-label" for="customRadio7">Espaço</label>
-            </div>
-            <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio8" name="Empresa" class="custom-control-input" value="Outro">
-                <label class="custom-control-label" for="customRadio8">Arpoador</label>
-            </div>
-            <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio9" name="Empresa" class="custom-control-input" value="Outro">
-                <label class="custom-control-label" for="customRadio9">Outro</label>
-            </div>
-            </p>
+        <div class="card-body card-buttons">
+            <button type="submit" placeholder="" class="btn" style="width: 12rem;">Confirmar</button>
+        </div>  
 
-
-            <div class="form-group form-group-cad">
-                <label for="formGroupExampleInput2">Unidade</label>
-                <div class="custom-control custom-checkbox">
-                    <div class="custom-control custom-radio">
-                        <input type="radio" id="unidade-radio1" name="unidade" value="Sede"
-                            class="custom-control-input">
-                        <label class="custom-control-label" for="unidade-radio1">Sede</label>
-                    </div>
-
-                    <div class="custom-control custom-radio">
-                        <input type="radio" id="unidade-radio2" name="unidade" value="silvado"
-                            class="custom-control-input">
-                        <label class="custom-control-label" for="unidade-radio2">Silvado</label>
-                    </div>
-
-                    <div class="custom-control custom-radio">
-                        <input type="radio" id="unidade-radio3" name="unidade" value="Espraiado"
-                            class="custom-control-input">
-                        <label class="custom-control-label" for="unidade-radio3">Espraiado</label>
-                    </div>
-
-                    <div class="custom-control custom-radio">
-                        <input type="radio" id="unidade-radio4" name="unidade" value="Outro"
-                            class="custom-control-input">
-                        <label class="custom-control-label" for="unidade-radio4">Outro</label>
-                    </div>
-                </div>
-            </div>
-
-            <p class="card-text">
-                <label for="input_telefone">Telefone: </label>
-                <input id="input_telefone" name="telefone" placeholder="{{query.telefone}}"></input>
-            </p>
-
-            <div class="card-body card-buttons">
-                <button type="submit" placeholder="" class="btn" style="width: 12rem;">Confirmar</button>
-            </div>
     </form>
 </main>
 

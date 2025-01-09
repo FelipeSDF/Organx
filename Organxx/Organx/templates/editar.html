@@ -1,11 +1,14 @@
 {%extends 'header.html'%}
 {%block content%}
 <main class="container">
-    <form id="cdastro_form">
+    {% endif %}
+
+    <form id="cadastro_form">
         <div class="form-group form-group-cad">
             <label for="formGroupExampleInput">CPF (somente numeros) ou Nome Completo</label>
             <input class="form-control form-control-lg" type="text" placeholder="">
         </div>
+
         <a class="btn btn-primary" href="#" role="button">Procurar</a>
     </form>
 </main>

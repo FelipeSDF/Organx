@@ -1,68 +1,24 @@
 {%extends 'header.html'%}
 {%block content%}
+{% load static %}
 <main class="container">
-    <form id="cdastro_form" method="post">{% csrf_token %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+
+    <form id="cdastro_form" action="{% url 'adicionar' %}" method="post">{% csrf_token %}
+    {% for quest in form %}
         <div class="form-group form-group-cad">
-            <label for="formGroupExampleInput2">Nome Completo</label>
-            <input type="text" class="form-control" id="formGroupExampleInput2" name="nome">
+        {{quest.label}}
+    
+        {{quest}}
         </div>
-        <div class="form-group form-group-cad">
-            <label for="formGroupExampleInput2">Telefone</label>
-            <input type="number" class="form-control" id="formGroupExampleInput2" name="telefone">
-        </div>
-
-        <div class="form-group form-group-cad">
-            <label for="formGroupExampleInput2">Empresa</label>
-            <div class="custom-control custom-checkbox">
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio4" name="Empresa" class="custom-control-input" value="Inova Rio">
-                    <label class="custom-control-label" for="customRadio4">Inova Rio</label>
-                </div>
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio5" name="Empresa" class="custom-control-input" value="Land">
-                    <label class="custom-control-label" for="customRadio5">Land</label>
-                </div>
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio6" name="Empresa" class="custom-control-input" value="Arpoador">
-                    <label class="custom-control-label" for="customRadio6">Arpoador</label>
-                </div>
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio7" name="Empresa" class="custom-control-input" value="Espaço">
-                    <label class="custom-control-label" for="customRadio7">Espaço</label>
-                </div>
-                
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio9" name="Empresa" class="custom-control-input" value="Outro">
-                    <label class="custom-control-label" for="customRadio9">Outro</label>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group form-group-cad">
-            <label for="formGroupExampleInput2">Unidade</label>
-            <div class="custom-control custom-checkbox">
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="unidade-radio1" name="Unidade" value="Sede" class="custom-control-input">
-                    <label class="custom-control-label" for="unidade-radio1">Sede</label>
-                </div>
-
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="unidade-radio2" name="Unidade" value="silvado" class="custom-control-input">
-                    <label class="custom-control-label" for="unidade-radio2">Silvado</label>
-                </div>
-
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="unidade-radio3" name="Unidade" value="Espraiado"
-                        class="custom-control-input">
-                    <label class="custom-control-label" for="unidade-radio3">Espraiado</label>
-                </div>
-
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="unidade-radio4" name="Unidade" value="outro" class="custom-control-input">
-                    <label class="custom-control-label" for="unidade-radio4">Outro</label>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
         <div class="form-group form-group-cad">
             <div class="submit-reset-area">
                 <input class="btn btn-primary" type="reset" value="Limpar">
@@ -70,20 +26,10 @@
             </div>
         </div>
     </form>
+
     <div id="add_complete" style="display: none;"> <h1>adcionado</h1> <button>fechar</button></div>
     <div id="add_error" style="display: none;"> <h1>adcionado</h1> <button>fechar</button></div>
 </main>
-{%if adicionado == True%}
-<script>
-    console.log('sim')
-</script>
 
-{%elif adicionado == False%}
-
-
-<script>
-        console.log('nao')
-</script>
-{%endif%}
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 {%endblock content%}
